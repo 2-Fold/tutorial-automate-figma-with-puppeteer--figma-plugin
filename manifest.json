@@ -1,0 +1,22 @@
+{
+  "name": "variable-handler",
+  "id": "1352803994708566822",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "parameters": [
+    {
+      "name": "Color Hex",
+      "key": "color-hex",
+      "allowFreeform": true
+    }
+  ],
+  "networkAccess": {
+    "allowedDomains": ["https://www.thecolorapi.com/"],
+    "reasoning": "",
+    "devAllowedDomains": []
+  },
+  "documentAccess": "dynamic-page"
+}
