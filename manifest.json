@@ -6,15 +6,8 @@
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": ["figma"],
-  "parameters": [
-    {
-      "name": "Color Hex",
-      "key": "color-hex",
-      "allowFreeform": true
-    }
-  ],
   "networkAccess": {
-    "allowedDomains": ["https://www.thecolorapi.com/"],
+    "allowedDomains": ["none"],
     "reasoning": "",
     "devAllowedDomains": []
   },
