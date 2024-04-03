@@ -11,6 +11,24 @@ interface PluginParameters {
   'color-hex': string;
 }
 
+async function getColors(seedColor: string) {
+  try {
+    const response = await fetch(
+      `https://www.thecolorapi.com/scheme?hex=${seedColor}`
+    );
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function setColorVariables(colorVariables: Color[]) {
+  const localVariables = await figma.variables.getLocalVariablesAsync('COLOR');
+  localVariables.forEach((variable: Variable, index) => {
+    variable.setValueForMode('7:0', colorVariables[index].rgb.fraction);
+  });
+}
+
 figma.on('run', async ({ command, parameters }: RunEvent) => {
   // Seed color determines the color scheme
   const seedColor = parameters?.['color-hex'];
@@ -18,26 +36,6 @@ figma.on('run', async ({ command, parameters }: RunEvent) => {
   if (!seedColor) {
     console.error('No seed color provided');
     figma.closePlugin();
-  }
-
-  async function getColors(seedColor: string) {
-    try {
-      const response = await fetch(
-        `https://www.thecolorapi.com/scheme?hex=${seedColor}`
-      );
-      return await response.json();
-    } catch (error) {
-      return error;
-    }
-  }
-
-  async function setColorVariables(colorVariables: Color[]) {
-    const localVariables = await figma.variables.getLocalVariablesAsync(
-      'COLOR'
-    );
-    localVariables.forEach((variable: Variable, index) => {
-      variable.setValueForMode('7:0', colorVariables[index].rgb.fraction);
-    });
   }
 
   const colors = await getColors(seedColor);
